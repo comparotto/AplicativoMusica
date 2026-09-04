@@ -6,13 +6,13 @@ import java.util.List;
 public class Playlist {
     private String nomePlaylist;
     private List<PlaylistM> itens;
-    private float duracao; // em minutos (calculada automaticamente)
+    private float duracao;
     private List<Usuario> donos;
 
     public Playlist(String nomePlaylist, List<Usuario> donos) {
         this.nomePlaylist = nomePlaylist;
         this.donos = donos != null ? donos : new ArrayList<>();
-        this.duracao = 0.0f; // Começa zerada
+        this.duracao = 0.0f;
         this.itens = new ArrayList<>();
     }
 
@@ -21,8 +21,6 @@ public class Playlist {
             int proximaPosicao = itens.size() + 1;
             PlaylistM item = new PlaylistM(musica, this, proximaPosicao);
             this.itens.add(item);
-
-            // Usa o método getter para somar a duração com segurança
             this.duracao += musica.getTempoMin();
         }
     }
@@ -46,14 +44,12 @@ public class Playlist {
             System.out.println("  - Nenhuma música na playlist.");
         } else {
             for (PlaylistM item : itens) {
-                // Alterado de getDataLancamento() para getTitulo()
                 System.out.println("  " + item.getPosicao() + ". " + item.getMusica().getNomeMusica());
             }
         }
         System.out.println("======================");
     }
 
-    // Getters e Setters
     public String getNomePlaylist() {
         return nomePlaylist;
     }

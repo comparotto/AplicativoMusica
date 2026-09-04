@@ -16,7 +16,6 @@ public class PerfilMusical {
         this.musicasRecomendadas = new ArrayList<>();
     }
 
-    // Método definido no diagrama
     public void recomendarMusica() {
         System.out.println("Recomendando músicas com base no gênero: " + this.generoMusical);
         if (musicasRecomendadas.isEmpty()) {
@@ -28,7 +27,7 @@ public class PerfilMusical {
         }
     }
 
-    // Métodos para gerenciar as listas de associação do diagrama
+
     public void adicionarPlaylist(Playlist playlist) {
         this.playlists.add(playlist);
     }
@@ -37,7 +36,7 @@ public class PerfilMusical {
         this.musicasRecomendadas.add(musica);
     }
 
-    // Getters e Setters
+
     public byte getId_usuario() {
         return id_usuario;
     }

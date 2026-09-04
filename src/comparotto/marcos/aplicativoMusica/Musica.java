@@ -4,13 +4,10 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- */
 public class Musica {
     String nomeMusica;
     Date dataLancamento;
-    float tempoMin; // Tempo em minutos
+    float tempoMin;
     String generoMusical;
     private List<Artista> artistas;
 
