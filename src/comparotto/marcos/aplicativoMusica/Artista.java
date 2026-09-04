@@ -2,16 +2,12 @@ package comparotto.marcos.aplicativoMusica;
 
 public class Artista extends Pessoa {
         private String nomeArtistico;
-
-    public Artista(int id, String nome, int idade) {
-        super(id, nome, idade);
-    }
     public void exibir() {
-        System.out.println("Nome Oficial do artista: "+getNome()+"\n"+"Nome Artístico: ");
+        System.out.println("Nome Oficial do artista: "+super.getNome()+"\n"+"Nome Artístico: "+this.nomeArtistico+"\n"+"Idade do Artista: "+super.getIdade());
     }
 
     public Artista(int id, String nome, int idade, String nomeArtistico) {
-        super(id, nome, idade);
+        super(nome, idade);
         this.nomeArtistico = nomeArtistico;
     }
 

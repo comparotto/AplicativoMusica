@@ -1,25 +1,15 @@
 package comparotto.marcos.aplicativoMusica;
 
 public class Pessoa {
-    private int id;
     private String nome;
     private int idade;
 
     public void exibir() {
-        System.out.println("Nome: "+nome+"\nIdade: "+idade  );
+        System.out.println("Nome: "+this.nome+"\nIdade: "+this.idade  );
     }
-    public Pessoa(int id, String nome, int idade) {
-        this.id = id;
+    public Pessoa(String nome, int idade) {
         this.nome = nome;
         this.idade = idade;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getNome() {
