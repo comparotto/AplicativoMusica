@@ -1,26 +1,59 @@
 package comparotto.marcos.aplicativoMusica;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Playlist {
     private String nomePlaylist;
-    private List<Musica> musicasEscolhidas;
-    private float duracao; // em  minutos
+    private List<PlaylistM> itens;
+    private float duracao; // em minutos (calculada automaticamente)
     private List<Usuario> donos;
 
-    public Playlist(String nomePlaylist, List<Musica> musicasEscolhidas, float duracao, List<Usuario> donos) {
+    public Playlist(String nomePlaylist, List<Usuario> donos) {
         this.nomePlaylist = nomePlaylist;
-        this.musicasEscolhidas = musicasEscolhidas;
-        this.duracao = duracao;
-        this.donos = donos;
-    }
-    public void adicionarMusica(Musica musica){
-        this.musicasEscolhidas.add(musica);
-    }
-    public void exibir(){
-        System.out.println("Nome da Playlist: "+this.nomePlaylist+"\nTempo de duração da Playlist: "+this.duracao+"\nDono(s)/Criador(es) da Playlist: "+this.donos+"\nMusicas da Playlist: "+this.musicasEscolhidas);
+        this.donos = donos != null ? donos : new ArrayList<>();
+        this.duracao = 0.0f; // Começa zerada
+        this.itens = new ArrayList<>();
     }
 
+    public void adicionarMusica(Musica musica) {
+        if (musica != null) {
+            int proximaPosicao = itens.size() + 1;
+            PlaylistM item = new PlaylistM(musica, this, proximaPosicao);
+            this.itens.add(item);
+
+            // Usa o método getter para somar a duração com segurança
+            this.duracao += musica.getTempoMin();
+        }
+    }
+
+    public void exibir() {
+        System.out.println("====== PLAYLIST ======");
+        System.out.println("Nome: " + this.nomePlaylist);
+        System.out.println("Duração Total: " + String.format("%.2f", this.duracao) + " min");
+
+        System.out.print("Dono(s): ");
+        if (donos.isEmpty()) {
+            System.out.println("Nenhum dono cadastrado.");
+        } else {
+            for (int i = 0; i < donos.size(); i++) {
+                System.out.print(donos.get(i).getNome() + (i < donos.size() - 1 ? ", " : "\n"));
+            }
+        }
+
+        System.out.println("\nMúsicas:");
+        if (itens.isEmpty()) {
+            System.out.println("  - Nenhuma música na playlist.");
+        } else {
+            for (PlaylistM item : itens) {
+                // Alterado de getDataLancamento() para getTitulo()
+                System.out.println("  " + item.getPosicao() + ". " + item.getMusica().getNomeMusica());
+            }
+        }
+        System.out.println("======================");
+    }
+
+    // Getters e Setters
     public String getNomePlaylist() {
         return nomePlaylist;
     }
@@ -29,20 +62,16 @@ public class Playlist {
         this.nomePlaylist = nomePlaylist;
     }
 
-    public List<Musica> getMusicasEscolhidas() {
-        return musicasEscolhidas;
+    public List<PlaylistM> getItens() {
+        return itens;
     }
 
-    public void setMusicasEscolhidas(List<Musica> musicasEscolhidas) {
-        this.musicasEscolhidas = musicasEscolhidas;
+    public void setItens(List<PlaylistM> itens) {
+        this.itens = itens;
     }
 
     public float getDuracao() {
         return duracao;
-    }
-
-    public void setDuracao(float duracao) {
-        this.duracao = duracao;
     }
 
     public List<Usuario> getDonos() {
